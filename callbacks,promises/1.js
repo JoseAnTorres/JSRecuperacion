@@ -1,0 +1,1 @@
+console.log("La primera llamada ha tardado 2000");

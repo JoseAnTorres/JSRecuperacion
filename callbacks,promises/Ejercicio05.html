@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 05</title>
+</head>
+
+<body>
+    <script>
+        async function loadJson(url) {
+            let response = await fetch(url);
+            if (response.ok) return await response.json();
+            throw new Error(response.status);
+        }
+
+        loadJson('no-such-user.json') // (3)
+            .catch(alert); // Error: 404
+    </script>
+</body>
+
+</html>

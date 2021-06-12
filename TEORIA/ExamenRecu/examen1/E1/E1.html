@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="section">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Catetos</th>
+                </tr>
+            </thead>
+            <tbody id="res">
+
+            </tbody>
+        </table>
+    </div>
+    <script>
+        let url = "datosTriangulos.json";
+
+        function obtenerDatosTriangulos(url, callback) {
+            let httpRequest = new XMLHttpRequest();
+
+            httpRequest.onload = () => {
+                let respuesta = JSON.parse(httpRequest.responseText);
+                callback(respuesta);
+            };
+            httpRequest.open('GET', url, true);
+            httpRequest.overrideMimeType('text/plain');
+            httpRequest.send(null);
+        }
+
+        obtenerDatosTriangulos(url, yaTenemosCalculadaHipotenusas);
+
+        function yaTenemosDatos(datos){
+            console.log(datos);
+            calcularHipotenusa(datos.triangulos, yaTenemosCalculadaHipotenusas);
+        }
+
+        function yaTenemosCalculadaHipotenusas(triangulos){
+            console.log(triangulos);
+            formatearTexto(triangulos, yaTenemosCalculadaHipotenusas)
+        }
+
+        function yaTenemosTexto(cadena){
+            console.log(cadena);
+        }
+
+        function calcularHipotenusa(triangulos, callback){
+            setTimeout(function(){
+                for(let i = 0; i<triangulos.length;i++){
+                    triangulos[i].hipotenusa=Math.hypot(triangulos[i].catetos[0],triangulos[i].catetos[1]);
+                }
+            })
+        }
+
+        function formatearTexto(triangulos, soyUnCallback) {
+            setTimeout(function () {
+                let cadena = "";
+                for (let i = 0; i < triangulos.length; i++) {
+                    cadena += "Cateto 1 = " + triangulos[i].catetos[0] + "\n";
+                    cadena += "Cateto 2 = " + triangulos[i].catetos[1] + "\n";
+                    cadena += "Hipotenusa = " + triangulos[i].hipotenusa + "\n";
+                    cadena += "Nombre = " + triangulos[i].nombre + "\n";
+                }
+                soyUnCallback(cadena)
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>

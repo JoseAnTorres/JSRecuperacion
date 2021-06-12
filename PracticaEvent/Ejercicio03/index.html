@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        .mouseOver {
+            color: red;
+        }
+
+        .mouseOut {
+            color: black;
+        }
+    </style>
+    <div id="element" class="AttachOnMouseOutText" onMouseOver="mouseOver();return true;"
+        onMouseOut="mouseOut();return true;">Texto</div>
+
+    <button id="btn1" onClick="reply_click(this.id)">Boton 1</button>
+    <button id="btn2" onClick="reply_click(this.id)">Boton 2</button>
+
+    <script>
+        function mouseOver() {
+            document.getElementById('element').className = 'mouseOver';
+        }
+
+        function mouseOut() {
+            document.getElementById('element').className = 'mouseOut';
+        }
+
+        function reply_click(clicked) {
+            alert(clicked);
+        }
+    </script>
+</body>
+
+</html>

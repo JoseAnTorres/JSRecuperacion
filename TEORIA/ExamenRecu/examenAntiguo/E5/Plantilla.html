@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>Usuarios:</div>
+    <ul>
+        <li>Juan</li>
+        <li>Pedro</li>
+    </ul>
+</body>
+<script>
+    let contenedor = document.getElementsByTagName("div")[0];
+    contenedor.textContent="Usuarios VIP";
+    contenedor.innerHTML="<strong>Usuarios VIP<strong>";
+    let ul = contenedor.nextElementSibling;
+    let primero = ul.firstElementChild;
+    primero.textContent="Pepe";
+    let segundo = primero.nextElementSibling;
+    segundo.textContent="Pepa";
+    console.log(ul);
+
+    
+</script>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+</head>
+
+<body>
+
+    <div class="smell-container">
+        <h1>Probando sistemas de almacenamiento</h1>
+
+        <form>
+            <input id="item" type="text" placeholder="New">
+            <button id="enviar"></button>
+        </form>
+
+        <h2>Número de intentos:</h2>
+        <label id=numeroReintentos></label>
+
+        <button>Limpiar número de reintentod</button>
+    </div>
+
+
+    <script>
+        window.onload = iniciar;
+        let numReintentos = 0;
+        const CLAVE = "NREINTENTOS";
+
+        function iniciar() {
+            let enviarBtn = document.getElementById("enviar");
+            enviarBtn.addEventListener("click", enviar);
+            //numReintentos = window.localStorage.getItem(CLAVE);
+
+            let limpiarBtn = document.getElementById("limpiar").addEventListener("click", function () {
+                reiniciarNumReintentos();
+                document.getElementById("numeroReintentos").textContent = 0;
+            });
+        }
+
+        function enviar() {
+            if (document.getElementById("item").value == "") {
+                alert("Campo vacio");
+                actualizarNumReintentos();
+                document.getElementById("enviar").textContent = window.localStorage.getItem(CLAVE);
+            }
+        }
+
+        function actualizarNumReintentos() {
+            let temp = window.localStorage.getItem(CLAVE);
+            if (temp == "")
+                temp = 0;
+            temp += 1;
+            window.localStorage.setItem(CLAVE, temp);
+        }
+
+        function reiniciarNumReintentos() {
+            window.localStorage.getItem(CLAVE, 0);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <script>
+        if (window.XMLHttpRequest) {
+            httpRequest = new XMLHttpRequest();
+        } else if (window.ActiveXObject) {
+            httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+        } else {
+            console.error("Error");
+        }
+
+        httpRequest.onload = procesarRespuesta;
+        httpRequest.open('GET', 'https://dades.eicub.net/api/1/festivals-assistents?Any=2019&format=json', true)
+        httpRequest.send(null);
+
+        function procesarRespuesta() {
+            var resposta = JSON.parse(httpRequest.responseText);
+            var lista = document.createElement('ul');
+            console.log(resposta);
+
+            for (var i = 0; i < resposta.length; i++) {
+
+                var item = processarDada(resposta[i]);
+                lista.appendChild(item);
+            }
+
+            document.body.appendChild(lista);
+        }
+
+        function processarDada(dada) {
+            var item = document.createElement('li');
+            var enllac = document.createElement('a');
+            enllac.textContent = dada.Nom_activitat;
+            if (dada.Web) {
+                enllac.setAttribute('href', dada.Web);
+            }
+            enllac.setAttribute('title', dada.Organitzador);
+            item.appendChild(enllac);
+
+            return item;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Festivals 2015</h1>
+</body>

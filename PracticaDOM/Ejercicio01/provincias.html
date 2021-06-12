@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <div id="norte">
+        <h2>Galicia</h2>
+        <ul id="lista">
+            <li>A Coruña</li>
+            <li>Lugo</li>
+            <li>Ourense</li>
+            <li>Pontevedra</li>
+        </ul>
+    </div>
+    <div id="sur">
+        <h2>Canarias</h2>
+        <ul id="lista">
+            <li>Santa Cruz de Tenerife</li>
+            <li>Las Palmas</li>
+        </ul>
+    </div>
+    <div id="texto"></div>
+</body>
+
+<script>
+    //Asignamos un evento escucha a la ventana del navegador para que reciba los clicks correspondientes
+    window.addEventListener("load",inicio);
+
+    function inicio(){//Recorre el documento a traves de las tags h2 y darle a cada uno de ellos un escucha
+        for(var i=0; i<document.getElementsByTagName("h2").length;i++){
+            document.getElementsByTagName("h2")[i].addEventListener("click",recorrer);
+        }
+    }
+    function recorrer(e){
+        var texto="";
+        var h2=e.target;//Recoge del documento el h2 seleccionado, se sabe el h2 gracias ale event
+        texto += "Has elegido "+h2.textContent;//Lee el contenido del h2 y muestra su contenido
+
+        var padre = h2.parentElement;//Observa al nodo padre que es el div en este caso a partir de h2
+        texto += " que esta situada en el "+padre.id+"<br/>";
+
+        var ul = h2.nextElementSibling;//Obtiene los proximos elementos a partir del h2
+
+        texto+="El número de provincias es "+ul.children.length+": ";//Lee los hijos y muestra el numero de
+                                                                    //iteraciones en int
+
+        var hijo = ul.firstChild;
+        while(hijo!=null){//Recorre los hijos y los añade al texto hasta que se quede vacio los hijos
+            texto+=" "+hijo.textContent;
+            hijo = hijo.nextElementSibling;
+        }
+
+        document.getElementById("texto").innerHTML = texto;//Añade el texto con los datos obtenidos al documento
+
+    }
+</script>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 06 a</title>
+</head>
+
+<body>
+    <script>
+        function mapeo(arr, callback) {
+            let nuevoArray = [];
+            for (let i = 0; i < arr.length; i++) {
+                nuevoArray.push(callback(arr[i]));
+            }
+            return nuevoArray;
+        }
+
+        const posts = mapeo([{
+            title: "Post1",
+            body: "This is post one"
+        }, {
+            title: "Post2",
+            body: "This is post two"
+        }], function (elemento) {
+            return elemento;
+        });
+
+        function createPost(newPost) {
+            posts.push(newPost)
+        }
+
+        function getPosts() {
+            setTimeout(() => {
+                let output = ``;
+                posts.forEach((post, index) => {
+                    output += `<li>${post.title}</li>`;
+                })
+                document.body.innerHTML = output;
+            }, 1000);
+        }
+
+        createPost({
+            title: "Post3",
+            body: "This is post three"
+        });
+
+        getPosts();
+    </script>
+</body>
+
+</html>

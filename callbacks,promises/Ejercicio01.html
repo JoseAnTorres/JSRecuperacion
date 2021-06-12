@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 01</title>
+</head>
+
+<body>
+    <script>
+        function llamadaServidor(numSegundos, src, callback) {
+            setTimeout(function () {
+                console.log(`Llamada al servidor de ${numSegundos} sg.`);
+                let script = document.createElement('script');
+                script.src = src;
+
+                script.onload = () => callback(null, script);
+                script.onerror = () => callback(new Error(`Script load error for ${src}`), "");
+
+                document.head.append(script);
+            }, numSegundos);
+        }
+
+        llamadaServidor("2000", '1.js', function (error, script) {
+            if (error) {
+                console.log("Esta fallando en la carga del primer script");
+            } else {
+                llamadaServidor("3000", '2.js', function (error, script) {
+                    if (error) {
+                        console.log("Esta fallando en la carga del segundo script");
+                    } else {
+                        llamadaServidor("4000", '3.js', function (error, script) {
+                            if (error) {
+                                console.log("Esta fallando en la carga del tercer script");
+                            } else {
+                                console.log("Hemos terminado todo perfecto");
+                            }
+                        });
+                    }
+                })
+            }
+        });
+    </script>
+</body>
+
+</html>

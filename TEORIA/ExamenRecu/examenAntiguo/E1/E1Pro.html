@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="section">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Catetos</th>
+                </tr>
+            </thead>
+            <tbody id="res">
+
+            </tbody>
+        </table>
+    </div>
+    <script>
+        let url = "datosTriangulos.json";
+
+        function obtenerDatosTriangulos(url) {
+            return new Promise ((resolve, reject) => {
+                let httpRequest = new XMLHttpRequest();
+
+                httpRequest.onload = () => {
+                    let respuesta = JSON.parse(httpRequest.responseText);
+                    resolve(respuesta);
+                };
+                httpRequest.onerror = function () {
+                    reject("Algo ha fallado");
+                };
+                httpRequest.open('GET', url, true);
+                httpRequest.overrideMimeType('text/plain');
+                httpRequest.send(null);
+            });
+        }
+
+        function calcularHipotenusa(triangulos) {
+            return new Promise((resolve, reject) => {
+                setTimeout(function () {
+                    for (let i = 0; i < triangulos.length; i++) {
+                        triangulos[i].hipotenusa = Math.hypot(triangulos[i].catetos[0], triangulos[i]
+                            .catetos[1]);
+                    }
+                    resolve(triangulos);
+                }, 2000);
+            });
+        }
+
+        function formatearTexto(triangulos) {
+            return new Promise((resolve, reject) => {
+                setTimeout(function () {
+                    let cadena = "";
+                    for (let i = 0; i < triangulos.length; i++) {
+                        cadena += "Cateto 1 = " + triangulos[i].catetos[0] + "\n";
+                        cadena += "Cateto 2 = " + triangulos[i].catetos[1] + "\n";
+                        cadena += "Hipotenusa = " + triangulos[i].hipotenusa + "\n";
+                        cadena += "Nombre = " + triangulos[i].nombre + "\n";
+                    }
+                    resolve(cadena);
+                }, 2000);
+            });
+        }
+
+        obtenerDatosTriangulos(url)
+            .then((datos) => {
+                return calcularHipotenusa(datos.triangulos)
+            })
+            .then((triangulos) => {
+                return formatearTexto(triangulos)
+            })
+            .then((texto) => {
+                console.log(texto)
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    </script>
+</body>
+
+</html>

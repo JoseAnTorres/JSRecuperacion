@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 04 all</title>
+</head>
+
+<body>
+    <script>
+        //En estos 3 procesos se cargan las promesas con estas operaciones
+        //asincronas con unos datos privados dentro del método
+
+        //resolve es un callback que ofrece el resultado 
+        //reject es un callback que normalmente se usa para la subsanacion de errores
+        const p1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log("Cargando numero 10");
+                resolve(10);//lanzo
+            },1000);//espero un segundo
+        });
+        const p2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log("Cargando numero 20");
+                resolve(20);//lanzo
+            },2000);//espero dos segundos
+        });
+        const p3 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log("Cargando numero 30");
+                resolve(30);//lanzo
+            },3000);//espero tres segundos
+        });
+
+        Promise.all([p1, p2, p3])//Es un callback donde reune un array de promises cuando son
+                                //satisfactorias y realiza un proceso con los promises en una coleccion
+            .then(num => {
+                const suma = num.reduce((p, c) => p + c);//sumando los elementos del array
+
+                console.log(`Coleccion: ${num}`);
+                console.log(`Suma de la coleccion: ${suma}`);
+            });
+    </script>
+</body>
+
+</html>

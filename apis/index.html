@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio</title>
+</head>
+
+<body>
+    <div id="contenedor">
+        <img id="imageRandom1" style="width:400px">
+        <img id="imageRandom2" style="width:400px">
+        <img id="imageRandom3" style="width:400px">
+    </div>
+    <button id='btn-dog1'>Perritos FETCH</button>
+    <button id='btn-dog2'>Perritos XML</button>
+</body>
+
+<script>
+    const cols = document.querySelectorAll('img');
+    const imageRandom1 = document.getElementById("imageRandom1");
+    const imageRandom2 = document.getElementById("imageRandom2");
+    const imageRandom3 = document.getElementById("imageRandom3");
+    const contenedorContenido = document.getElementById("contenedor");
+
+    const boton1 = document.getElementById("btn-dog1");
+    const boton2 = document.getElementById("btn-dog2");
+
+    boton1.addEventListener("click", function(){
+        getRandomImage1(imageRandom1);
+        getRandomImage1(imageRandom2);
+        getRandomImage1(imageRandom3);
+    },false);
+
+    boton2.addEventListener("click", function(){
+        getRandomImage2(imageRandom1);
+        getRandomImage2(imageRandom2);
+        getRandomImage2(imageRandom3);
+    },false);
+
+    function getRandomImage1(img) {
+        fetch("https://dog.ceo/api/breeds/image/random")
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (json) {
+                console.log(json);
+                var imageUrl = json.message;
+                img.src = imageUrl;
+            })
+            .catch(function (error) {
+                console.log(error);
+
+            });
+    }
+
+    function getRandomImage2(img) {
+        var XHR = new XMLHttpRequest();
+
+        XHR.onreadystatechange = function () {
+            if (XHR.readyState == 4 && XHR.status == 200) {
+                var url = JSON.parse(XHR.responseText);
+                img.src = url.message;
+                //cols.forEach(element => element.src = url.message);
+            }
+        }
+        XHR.open('GET', 'https://dog.ceo/api/breeds/image/random');
+        XHR.send();
+    }
+</script>
+
+</html>

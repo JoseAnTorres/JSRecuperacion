@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 04 race</title>
+</head>
+
+<body>
+    <script>
+        //Lo mismo que el anterior ejemplo, cargamos dos promises
+        const p1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('Promesa P1 resuelta');
+                resolve(10);//Lanzo
+            },1000);
+
+        });
+
+        const p2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('Promesa P2 erronea');
+                reject(20);//Rechazo
+            },2000);
+        });
+
+
+        //A diferencia del anterior, aqui se coloca los promises donde se hara
+        //un filtro con aquel promise que acabe antes o donde se obtenga el primer
+        //resultado
+        Promise.race([p1, p2])
+            .then(resultado => console.log(`Resuelto: ${resultado}`))
+            .catch(error => console.log(`Error: ${error}`));
+    </script>
+</body>
+
+</html>

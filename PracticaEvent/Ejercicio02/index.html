@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Documento</title>
+	<style>
+		div {
+			width: 100px;
+			height: 100px;
+			border: 1px solid black;
+		}
+
+		.blanco {
+			background-color: white;
+		}
+
+		.rojo {
+			background-color: red;
+		}
+
+		.amarillo {
+			background-color: yellow;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="prueba" tabindex=1></div>
+	<script>
+		document.addEventListener("keyup", (e) => {
+			if(e.code === 'KeyB') document.getElementById("prueba").className="blanco";
+			if(e.code === 'KeyR') document.getElementById("prueba").className="rojo";
+			if(e.code === 'KeyA') document.getElementById("prueba").className="amarillo";
+		});
+	</script>
+</body>
+
+</html>

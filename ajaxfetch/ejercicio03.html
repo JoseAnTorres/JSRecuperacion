@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 03</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Nota</th>
+                    </tr>
+                </thead>
+                <tbody id="res">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+       const xhttp = new XMLHttpRequest();
+       xhttp.open('GET','ciudadanos.json',true);
+       xhttp.send();
+       xhttp.onreadystatechange = function(){
+           if(this.readyState==4 && this.status==200){
+               let datos = JSON.parse(this.responseText);
+               let res = document.querySelector('#res');
+               res.innerHTML='';
+
+               for(let item of datos){
+                   res.innerHTML += 
+                   `<tr>
+                        <td>${item.nombre}</td>
+                        <td>${item.edad}</td>
+                        <td>${item.ciudad}</td>
+                    </tr>`
+               }
+           }
+       }
+    </script>
+</body>
+
+</html>

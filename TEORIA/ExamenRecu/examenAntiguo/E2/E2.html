@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="index.css">
+   <title>Document</title>
+
+</head>
+
+<body>
+   <label name="Texto Usuario1: " class="margenes">Texto Usuario1: </label>
+   <input id="texto1" type="text" class="margenes2">
+   <button id="botonAnadir1" class="margenes"> Añadir Texto Usuario1 </button>
+
+   <br />
+
+   <label name="Texto Usuario2: " class="margenes">Texto Usuario2: </label>
+   <input id="texto2" type="text" class="margenes2">
+   <button id="botonAnadir2" class="margenes"> Añadir Texto Usuario 2 </button>
+
+   <br />
+
+
+   <textarea id="textarea" class="margenes" rows=15> Chat: </textarea>
+   <button id="botonLimpiar" class="margenes"> Eliminar </button>
+
+
+   <br />
+
+   <script>
+      window.onload = iniciar;
+      const usuario1_key = "USER1NAME";
+      const usuario2_key = "USER2NAME";
+      const chat_key = "CHATKEY";
+
+      function iniciar() {
+         document.getElementById("botonAnadir1").addEventListener("click", anadirUsuario1);
+         document.getElementById("botonAnadir2").addEventListener("click", anadirUsuario2);
+         document.getElementById("botonLimpiar").addEventListener("click", eliminar);
+      }
+
+      function anadirUsuario1() {
+         //Primero miramos si ya tenemos el nombre del usuario 1:
+         let nombre = localStorage.getItem(usuario1_key, "");
+         if (nombre == null) {
+            nombre = prompt("Dime tu nombre: ");
+            //Guardar el nombre del usuario 1
+            if (nombre != "")
+               localStorage.setItem(usuario1_key, nombre);
+         }
+         let mensaje = nombre + ": " + document.getElementById("texto1").value + "\n";
+         let volcadoChat = localStorage.getItem(chat_key);
+
+         if (volcadoChat == null)
+            volcadoChat = "";
+         volcadoChat += mensaje;
+
+         localStorage.setItem(chat_key, volcadoChat);
+         document.getElementById("textarea").value = volcadoChat;
+      }
+
+      function anadirUsuario2() {
+         let nombre = localStorage.getItem(usuario2_key, "");
+         if (nombre == null) {
+            nombre = prompt("Dime tu nombre: ");
+            if (nombre != "")
+               localStorage.setItem(usuario2_key, nombre);
+         }
+         let mensaje = nombre + ": " + document.getElementById("texto2").value + "\n";
+         let volcadoChat = localStorage.getItem(chat_key);
+
+         if (volcadoChat == null)
+            volcadoChat = "";
+         volcadoChat += mensaje;
+
+         localStorage.setItem(chat_key, volcadoChat);
+         document.getElementById("textarea").value = volcadoChat;
+      }
+
+      function eliminar() {
+         localStorage.removeItem(chat_key);
+         localStorage.removeItem(usuario2_key);
+         localStorage.removeItem(usuario1_key);
+         document.getElementById("texto1").value = "";
+         document.getElementById("texto2").value = "";
+         document.getElementById("textarea").value = "";
+      }
+   </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Captura y burbuja</title>
+</head>
+
+<body>
+    <div id="capt1">
+        <span id="capt2">Pulsa aquí para la fase de captura.</span>
+    </div>
+    <div id="burbuja1">
+        <span id="burbuja2">Pulsa aquí para la fase de burbuja.</span>
+    </div>
+    <script>
+        var capt1 = document.getElementById('capt1'),
+            capt2 = document.getElementById('capt2'),
+            burbuja1 = document.getElementById('burbuja1'),
+            burbuja2 = document.getElementById('burbuja2');
+        capt1.addEventListener('click', function () {
+            alert("El evento de div se acaba de desencadenar .");
+        }, true);
+        capt2.addEventListener('click', function () {
+            alert("El evento de span se acaba de desencadenar.");
+        }, true);
+        burbuja1.addEventListener('click', function () {
+            alert("El evento de div se acaba de desencadenar.");
+        }, false);
+        burbuja2.addEventListener('click', function () {
+            alert("El evento de span se acaba de desencadenar.");
+        }, false);
+    </script>
+</body>
+
+</html>

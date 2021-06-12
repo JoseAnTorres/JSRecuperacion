@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<body>
+    <button id="boton">Usuarios</button>
+
+    <img id="avatar" />
+    
+    <script src="api.js"></script>
+    
+    <script>
+        function pintarDatosUsuarios(datos) {
+            if(datos)
+            {
+                let usuarios = datos;
+                document.getElementById("avatar").src = usuarios.results[0].picture.large
+            }
+            else
+                console.log("Houston, ha habido un problema cargando datos del servidor");
+        }
+
+        document.getElementById("boton").addEventListener("click", function(){
+            llamadaGetAPI ( "https://randomuser.me/api/", pintarDatosUsuarios);
+        });
+    </script>
+</body>

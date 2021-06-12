@@ -1,0 +1,65 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Ejercicio 1 - DOM básico</title>
+</head>
+
+<body>
+	<p>
+		Lorem ipsum dolor sit amet,
+		<a href="http://prueba">consectetuer adipiscing elit</a>
+		. Sed mattis enim vitae orci.
+		<a href="http://prueba2">Fusce porta</a>
+		. Duis pellentesque.
+	</p>
+
+	<p>
+		Aenean at nisl. Maecenas egestas dapibus odio.
+		<a href="http://prueba">Ut bibendum blandit est</a>
+		. Curabitur vestibulum.
+		<a href="http://prueba3">consequat sem quis massa</a>
+		. Donec aliquam euismod.
+	</p>
+
+	<p>
+		Donec sagittis,
+		<a href="http://prueba">aliquam leo odio sed sem</a>
+		. Quisque eget.
+		<a href="http://prueba4">egestas</a>
+		adipiscing ligula.
+		<a href="http://prueba5">Sed non lectus non est pellentesque</a>
+		auctor.
+	</p>
+</body>
+
+</html>
+
+<script>
+	window.onload = function () {
+		var info = document.getElementById("lorem");
+		// 2.1 Obtener los elementos de tipo enlace y recibir su longitud
+		var enlaces = document.getElementsByTagName("a");
+		console.log("Numero de enlaces = " + enlaces.length);
+
+		// 2.2 Se localiza el penultimo enlace a traves de de la longitud
+		var mensaje = "El penultimo enlace apunta a: " + enlaces[enlaces.length - 2].href;
+		console.log(mensaje);
+
+		// 2.3 Se toma un contador para que localice aquellos links que contengan el link prueba
+		var contador = 0;
+		for (var i = 0; i < enlaces.length; i++) {
+			if (enlaces[i].href == "http://prueba/") {
+				contador++;
+			}
+		}
+		console.log(contador + " enlaces apuntan a http://prueba/");
+
+		// 2.4 Dentro del documento localizar el tercer array (2 [0,1,2]) y contar el numero de enlaces
+		var parrafos = document.getElementsByTagName("p");
+		enlaces = parrafos[2].getElementsByTagName("a");
+		console.log("Numero de enlaces del tercer párrafo = " + enlaces.length);
+	}
+</script>

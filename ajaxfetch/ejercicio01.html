@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 01</title>
+</head>
+<body>
+    <table id="demo"></table>
+
+    <script>
+        function cargarCatalogo(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange=function(){
+                if(this.readyState==4 && this.status==200){
+                    cargarXML(this);
+                }
+            };
+            xhr.open("GET","alumnos.xml","true");
+            xhr.send();
+        }
+
+        function cargarXML(xml){
+            var docXML =xml.responseXML;
+            var tabla = "<tr><th>Nombre</th><th>Apellidos</th><th>Notas</th></tr>";
+            var alumnos = docXML.getElementsByTagName("alumno");
+            for (var i = 0; i<alumnos.length; i++){
+                tabla+="<tr><td>";
+                tabla+=alumnos[i].getElementsByTagName("nombre")[0].childNodes[0].nodeValue;
+                tabla+="</td><td>";
+                tabla+=alumnos[i].getElementsByTagName("apellido")[0].childNodes[0].nodeValue;
+                tabla+="</td><td>";
+                tabla+=alumnos[i].getElementsByTagName("nota")[0].childNodes[0].nodeValue; 
+                tabla+="</td></tr>";   
+            }
+            document.getElementById("demo").innerHTML = tabla;
+        }
+        cargarCatalogo();
+    </script>
+</body>
+</html>

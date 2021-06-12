@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    .yellow {
+        background-color: yellow;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body id="body">
+    <p id="p1">
+        No comas ajos ni cebollas, porque no saquen por el olor tu villanería. Anda despacio; habla con resposo; pero no
+        de manera que parezca que te escuchas a ti mismo; que toda afectación es mala. Come poco y cena más poco; que la
+        salud de todo el cuerpo se fragua en la oficina del estómago. Sé templado en el beber, considerando que el vino
+        demasiado ni guarda secreto, ni cumple palabra. Ten cuenta, Sancho, de no mascar a dos carrillos, ni de erutar
+        delante de nadie.
+    </p>
+    </br>
+    <p id="p2">
+        La libertad, Sancho, es uno de los más preciosos dones que a los hombres dieron los cielos; con ella no pueden
+        igualarse los tesoros que encierra la tierra ni el mar encubre; por la libertad, así como por la honra se puede
+        y debe aventurar la vida, y, por el contrario, el cautiverio es el mayor mal que puede venir a los hombres
+    </p>
+</body>
+
+</html>
+
+<script>
+    //3.1 Añadir un enlace al final del documento
+    function insertarDespues(referenceNode, newNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    }
+
+    var el = document.createElement("span");//crear enlace
+    var str = "Fragmentos del Quijote";
+    var result = str.link("https://wpd.ugr.es/~agamizv/?p=4  ");
+    el.innerHTML = result;
+    var div = document.getElementById("p2");
+    insertarDespues(div, el);
+
+    //3.2
+
+    //3.3 Obtener el numero total de palabras del documento
+    function before() {//Situar el h1 al principio del documento y obtener el contador con la cifra resultante
+        var newItem = document.createElement("h1");
+        var textnode = document.createTextNode(count1);
+        newItem.appendChild(textnode);
+
+        var list = document.getElementById("p1");
+        list.insertBefore(newItem, list.childNodes[0]);
+    }
+    var count1 = document.getElementById('p1').innerHTML.split(/[^\s]+/g).length;//Obtener las palabras de parrafo 1
+    var count2 = document.getElementById('p2').innerHTML.split(/[^\s]+/g).length;//Obtener las palabras de parrafo 2
+    before();
+    
+    var el = document.createElement("h1");
+    var result = count2;
+    el.innerHTML = result;
+    var div = document.getElementById("p1");
+    insertarDespues(div, el);
+
+    //3.4 Subrayar aquellas palabras con 7 o mas letras, para el subrayado tenemos que añadir un estilo css
+    //y replace para que se realice el subrayado gracias a <mark>
+    let pElement1 = document.getElementById("p1");
+    let pElement2 = document.getElementById("p2");
+
+    function subrayado(element) {
+
+        let longestWord = "1234567";
+        const words = element.textContent.split(" ");
+
+        for (let i = 0; i < words.length; i++) {
+            if (words[i].length > longestWord.length) {
+                element.innerHTML = element.innerHTML.replace(words[i], `<mark>${words[i]}</mark>`)
+            }
+        }
+        return;
+    }
+
+    subrayado(pElement1);
+    subrayado(pElement2);
+</script>

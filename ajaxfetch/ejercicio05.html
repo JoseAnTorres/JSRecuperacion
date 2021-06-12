@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5</title>
+</head>
+<body>
+    <div id='pokemon'></div>
+    <script>
+        const url = 'https://pokeapi.co/api/v2/pokemon/76'
+
+        fetch(url).then(response => response.json()).then(data=>{
+            let element = document.getElementById('pokemon')
+            element.innerHTML=
+            `<p>${data.name}</p>
+             <p>${data.order}</p>
+             <img src='${data.sprites.front_default}'/>`;
+
+             console.log(data);
+        }).catch(err=>console.log(err))
+    </script>
+</body>
+</html>
+
+<!--
+    1.- 
+    CORS es un mecanismo que usa headers adicionales de http para llamar a los servidores
+    que puedan acceder a un origen o diferentes origenes. Ejemplo: Si se quiere llamar desde dominio X
+    a dominio Y si no esta bien configurado no podra mandar solicitudes.
+
+    JSONP es una forma de comunicación que nos permite trabajar con restricciones al realizar llamadas des un cliente
+    web a un servidor utilizando callbacks para que el cliente envie un callback javascript y el servidor opere de nuevo
+    el callback con el resultado 
+
+    He saltado estas restricciones con fetch para acceder a los recursos del servidor de forma asincorna, gracias a las promesas
+    se realiza funcionalidades con Ajax.
+
+    2.-
+    Se ha sacado desde https://pokeapi.co que es una página para traer pokemones con sus habilidades,
+    Tipo JSON
+-->

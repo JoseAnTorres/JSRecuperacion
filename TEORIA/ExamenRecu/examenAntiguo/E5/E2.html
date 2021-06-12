@@ -1,0 +1,39 @@
+<html>
+
+<body>
+    <h1>Primera cabecera</h1>
+    <ul>
+        <li>Primer elemento de la primera lista</li>
+        <li>Segundo elemento de la primera lista</li>
+        <li>Tercer elemento de la primera lista</li>
+    </ul>
+    <h1 class="secundaria">Segunda cabecera</h1>
+    <p id="contenido" class="segundo párrafo">Un párrafo</p>
+    <ul>
+        <li>Primer elemento de la segunda lista</li>
+        <li>Segundo elemento elemento de la segunda lista</li>
+        <li>Tercer elemento de la segunda lista</li>
+    </ul>
+    <script>
+        console.log('-- Cabeceras h1 en clase secundaria --');
+        var todosElementos = document.querySelectorAll('h1.secundaria');
+        for (var i = 0; i < todosElementos.length; i++) {
+            console.log(todosElementos[i].textContent);
+        }
+        console.log('-- Todos los elementos de las listas --');
+        var elementosLista = document.querySelectorAll('li');
+        for (var i = 0; i < elementosLista.length; i++) {
+            console.log(elementosLista[i].textContent);
+        }
+        console.log('-- Primeros elementos de las listas --');
+        var elementosPrimeros = document.querySelectorAll('li:first-child');
+        for (var i = 0; i < elementosPrimeros.length; i++) {
+            console.log(elementosPrimeros[i].textContent);
+        }
+        console.log("---------------------------------------");
+        let temp = document.querySelectorAll(" ul:nth-child(2) li");
+        console.log(temp);
+    </script>
+</body>
+
+</html>
