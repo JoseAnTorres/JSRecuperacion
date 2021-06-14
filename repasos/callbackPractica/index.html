@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img id="foto">
+    <img id="fotoGato">
+    <img id="fotoRick">
+</body>
+<script src="Fetch.js"></script>
+<script>
+    /*
+    let imagen=document.getElementById("foto");
+    let imagenGato=document.getElementById("fotoGato");
+    let imagenRick=document.getElementById("fotoRick");
+
+    //obtenerDatos("https://dog.ceo/api/breeds/image/random" ,imagen);
+    //obtenerDatosGato("https://api.thecatapi.com/v1/images/search" ,imagenGato)
+    //obtenerDatosRick("https://rickandmortyapi.com/api/character" ,imagenGato)
+
+    obtenerDatosGen("https://dog.ceo/api/breeds/image/random", pintarPerro);
+    function pintarPerro(datos){
+        imagen.src =  datos.message;
+    }
+
+    obtenerDatosGen("https://api.thecatapi.com/v1/images/search", pintarGato);
+    function pintarGato(datos){
+        imagenGato.src =  datos[0].url;
+    }
+
+    obtenerDatosGen("https://rickandmortyapi.com/api/character", pintarRick);
+    function pintarRick(result){
+        imagenRick.src =  result[0].images;
+    }
+    */
+
+    function llamadaServidor(seg, callback) {
+        setTimeout(function () {callback(seg) }, seg);
+    }
+
+    llamadaServidor(3000, mostrarResultado);
+    llamadaServidor(2000, mostrarResultado);
+    llamadaServidor(1000, mostrarResultado);
+    llamadaServidor(4000, mostrarResultado);
+    console.log("Pepe");
+
+    function mostrarResultado(num){
+        console.log(`Llama ${num} sg`);
+    }
+
+    function cargaPesada(){
+        let inicio=Date.now();
+
+        obtenerDatosGen("https://www.reddit.com/r/AskReddit/.json", mostrarTiempos)
+
+        function mostrarTiempos(){
+            let fin = Date.now();
+            console.log("Tiempo empleado = "+(fin-inicio));
+        }
+    }
+    cargaPesada();
+</script>
+
+</html>

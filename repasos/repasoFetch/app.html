@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="" alt="" width="500px">
+    <script>
+        /*
+        fetch("https://api.agify.io?name=michael")
+            .then(respuesta=>respuesta.json())
+            .then(datos=>{
+                console.log("Nombre = "+datos.name);
+                console.log("Edad = "+datos.age);
+            })
+            */
+           /*
+            fetch("https://api.agify.io?name[]=michael&name[]=matthew&name[]=jane")
+            .then(respuesta=>respuesta.json())
+            .then(datos=>{datos.forEach(element => {
+                console.log("Nombre = "+element.name);
+                console.log("Edad = "+element.age);
+            });
+            })
+            */
+           /*
+           let img = document.querySelector("img");
+            fetch("https://pokeapi.co/api/v2/pokemon/ditto")
+            .then(respuesta=>respuesta.json())
+            .then(datos=>{
+                console.log("Las habilidades");
+                datos.abilities.forEach(element => {
+                console.log("Nombre habilidad = "+element.ability.name);
+            });
+            img.src=datos.sprites.front_default
+            })
+            */
+           /*
+            let img = document.querySelector("img");
+            fetch("https://pokeapi.co/api/v2/pokemon/ditto")
+            .then(respuesta=>respuesta.json())
+            .then(datos=>{
+                console.log("Las habilidades");
+                datos.abilities.forEach(element => {
+                console.log("Nombre habilidad = "+element.ability.name);
+            });
+            //img.src=datos.sprites.front_default
+            //img.src=datos.sprites.versions["generation-v"]["black-white"].animated.front_default;
+            })
+            */
+            let httpRequest=new XMLHttpRequest();
+            let img = document.querySelector("img");
+            httpRequest.onload=procesarRespuesta;
+            httpRequest.onerror=procesarError;
+
+            httpRequest.open('GET','https://pokeapi.co/api/v2/pokemon/ditto',true);
+            httpRequest.send(null);
+
+            function procesarRespuesta(){
+                var respuesta=httpRequest.responseText;
+
+                let datos =JSON.parse(respuesta);
+
+                img.src=datos.sprites.versions["generation-v"]["black-white"].animated.front_default;
+            }
+
+            function procesarError(){
+                console.log("Algo ha petado");
+            }
+    </script>
+</body>
+
+</html>
